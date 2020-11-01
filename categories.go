@@ -7,19 +7,18 @@ import (
 	"net/http"
 )
 
-// Categories contains a list of categories
-type Categories struct {
-	Data []*Category `json:"data"`
-}
-
 // Category contains a single category
 type Category struct {
 	Code  float64 `json:"categoryCode"`
 	Title string  `json:"categoryTitle"`
 }
 
+type categories struct {
+	Data []*Category `json:"data"`
+}
+
 // Categories returns available categories
-func (c *Client) Categories() (*Categories, error) {
+func (c *Client) Categories() ([]*Category, error) {
 	req, err := http.NewRequest(http.MethodGet, fmt.Sprintf("%s/categories", baseURL), nil)
 	if err != nil {
 		return nil, err
@@ -37,8 +36,8 @@ func (c *Client) Categories() (*Categories, error) {
 		return nil, err
 	}
 
-	categories := new(Categories)
+	categories := new(categories)
 	json.Unmarshal(content, categories)
 
-	return categories, nil
+	return categories.Data, nil
 }

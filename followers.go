@@ -8,8 +8,7 @@ import (
 	"net/http"
 )
 
-// Followers contains a list of followers
-type Followers struct {
+type followers struct {
 	Data []string `json:"data"`
 }
 
@@ -19,7 +18,7 @@ type followersRequest struct {
 
 // Followers gets the list of usernames that follow a specific channel.
 // Pass an empty string to return followers of your main channel.
-func (c *Client) Followers(channelName string) (*Followers, error) {
+func (c *Client) Followers(channelName string) ([]string, error) {
 	reqJSON, err := json.Marshal(&followersRequest{ChannelName: channelName})
 	if err != nil {
 		return nil, err
@@ -44,8 +43,8 @@ func (c *Client) Followers(channelName string) (*Followers, error) {
 		return nil, err
 	}
 
-	followers := new(Followers)
+	followers := new(followers)
 	json.Unmarshal(content, followers)
 
-	return followers, nil
+	return followers.Data, nil
 }

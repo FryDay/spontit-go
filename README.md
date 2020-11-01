@@ -40,11 +40,11 @@ func main() {
 - [x] Categories
 - [ ] Channel
   - [x] Create
-  - [ ] Get
+  - [x] Get
   - [ ] Change
   - [x] Delete
   - [ ] Profile Image
-- [ ] Channels
+- [x] Channels
 - [x] Followers
 
 ### Other
