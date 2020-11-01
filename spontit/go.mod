@@ -1,4 +1,4 @@
-module github.com/FryDay/spontit-go
+module github.com/FryDay/spontit-go/spontit
 
 go 1.15
 

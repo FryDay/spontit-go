@@ -1,9 +1,9 @@
-# Go client for Spontit API
+# Go client for the Spontit API [![PkgGoDev](https://pkg.go.dev/badge/github.com/FryDay/spontit-go)](https://pkg.go.dev/github.com/FryDay/spontit-go)
 
 Spontit-go is an unofficial [Spontit](https://spontit.com/) client for the [Go](http://www.golang.org/) programming language.
 
 ## Installation
-`go get github.com/FryDay/spontit-go`
+`go get github.com/FryDay/spontit-go/spontit`
 
 ## Usage
 Create a `.env` file in the root of your project and add the following lines:
