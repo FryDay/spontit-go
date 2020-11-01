@@ -31,3 +31,18 @@ func main() {
     // Do things with the client here...
 }
 ```
+
+## Progress
+
+### API
+
+- [x] Push
+- [x] Categories
+- [ ] Channel
+  - [x] Create
+  - [ ] Get
+  - [ ] Change
+  - [x] Delete
+  - [ ] Profile Image
+- [ ] Channels
+- [ ] Followers

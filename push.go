@@ -8,7 +8,7 @@ import (
 	"net/http"
 )
 
-// Push contains attrubutes for a push notification
+// Push contains attributes for a push notification
 type Push struct {
 	// To provide text in a push, supply one of either "content" or "pushContent" (or both).
 	// Limited to 2500 characters. (Required if a value for "pushContent" is not provided).
