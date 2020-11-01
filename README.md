@@ -3,7 +3,7 @@
 Spontit-go is an unofficial [Spontit](https://spontit.com/) client for the [Go](http://www.golang.org/) programming language.
 
 ## Installation
-`go get github.com/FryDay/spontit-go/spontit`
+`go get github.com/FryDay/spontit-go`
 
 ## Usage
 Create a `.env` file in the root of your project and add the following lines:
