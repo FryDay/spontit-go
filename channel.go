@@ -72,37 +72,24 @@ func (c *Client) CreateChannel(name string) (*ChannelResult, error) {
 }
 
 // DeleteChannel deletes a channel
-func (c *Client) DeleteChannel(name string) (*ChannelResult, error) {
+func (c *Client) DeleteChannel(name string) error {
 	if name == "" {
-		return nil, fmt.Errorf("Name is required")
+		return fmt.Errorf("Name is required")
 	}
 
 	reqJSON, err := json.Marshal(&Channel{Name: name})
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	req, err := http.NewRequest(http.MethodDelete, fmt.Sprintf("%s/channel", baseURL), bytes.NewBuffer(reqJSON))
 	if err != nil {
-		return nil, err
+		return err
 	}
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("X-Authorization", c.config.key)
 	req.Header.Add("X-UserId", c.config.userID)
 
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	content, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	channelResult := new(ChannelResult)
-	json.Unmarshal(content, channelResult)
-
-	return channelResult, nil
+	_, err = c.httpClient.Do(req)
+	return err
 }

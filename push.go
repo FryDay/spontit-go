@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"net/http"
 )
 
@@ -57,47 +56,25 @@ type Push struct {
 	IOSDeepLink string `json:"iOSDeepLink,omitempty"`
 }
 
-// PushResult contains the results of a push notification
-type PushResult struct {
-	Data pushResultData `json:"data"`
-}
-
-type pushResultData struct {
-	Message string `json:"message"`
-}
-
 // Push sends a push notification
-func (c *Client) Push(push *Push) (*PushResult, error) {
+func (c *Client) Push(push *Push) error {
 	if push.Content == "" && push.PushContent == "" {
-		return nil, fmt.Errorf("Either Content, PushContent, or both must be provided")
+		return fmt.Errorf("Either Content, PushContent, or both must be provided")
 	}
 
 	reqJSON, err := json.Marshal(push)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	req, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/push", baseURL), bytes.NewBuffer(reqJSON))
 	if err != nil {
-		return nil, err
+		return err
 	}
 	req.Header.Add("Content-Type", "application/json")
 	req.Header.Add("X-Authorization", c.config.key)
 	req.Header.Add("X-UserId", c.config.userID)
 
-	resp, err := c.httpClient.Do(req)
-	if err != nil {
-		return nil, err
-	}
-	defer resp.Body.Close()
-
-	content, err := ioutil.ReadAll(resp.Body)
-	if err != nil {
-		return nil, err
-	}
-
-	pushResult := new(PushResult)
-	json.Unmarshal(content, pushResult)
-
-	return pushResult, nil
+	_, err = c.httpClient.Do(req)
+	return err
 }
