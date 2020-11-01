@@ -45,4 +45,9 @@ func main() {
   - [x] Delete
   - [ ] Profile Image
 - [ ] Channels
-- [ ] Followers
+- [x] Followers
+
+### Other
+
+- [ ] Tests
+- [ ] Examples
